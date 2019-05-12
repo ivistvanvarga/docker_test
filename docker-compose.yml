@@ -1,0 +1,13 @@
+version: '3'
+services:
+  nginx:
+    build: ./docker_files/1
+    ports:
+     - "8080:8080"
+     - "80:80"
+    networks:
+      - frontend
+
+networks:
+  frontend:
+  backend:
