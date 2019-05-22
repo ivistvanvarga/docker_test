@@ -1,13 +1,53 @@
 version: '3'
 services:
   nginx:
-    build: ./docker_files/1
+    build: ./docker_files/nginx
     ports:
-     - "8080:8080"
-     - "80:80"
+      - "80:80"
+      - "443:443"
     networks:
       - frontend
+    depends_on:
+      - jetty
+  jetty:
+    image: jetty:9.4.18-jre11
+    networks:
+      - backend
+      - frontend
+      - database
+    depends_on:
+      - redis
+  jetty2:
+    build: ./docker_files/jetty
+    ports:
+     - "8085:8080"
+     - "8080:80"
+    networks:
+      - backend
+      - frontend
+      - database
+    depends_on:
+      - redis
+  redis:
+    image: redis
+    networks:
+      - backend
+      - database
+
 
 networks:
   frontend:
+    ipam:
+      config:
+        - subnet: 172.28.0.0/16
+
+
   backend:
+    ipam:
+      config:
+        - subnet: 172.128.0.0/16
+
+  database:
+    ipam:
+      config:
+        - subnet: 172.228.0.0/16
