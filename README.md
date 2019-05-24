@@ -1,5 +1,7 @@
 # docker_test
 
+yum install -y epel-release.noarch &&yum  install -y docker.x86_64 docker-compose.noarch git
+
 docker file:
  docker build -t dockertest:1 docker_files/build_test
  docker run -td --name dockertest --entrypoint /bin/bash  dockertest:1 
@@ -10,6 +12,10 @@ docker file:
 
 create:
 docker-compose -f "docker-compose.yml" up -d --build
+
+
+http://localhost/jettyapp2
+http://localhost/jettyapp1
 
 destory:
 docker-compose -f "docker-compose.yml" down --remove-orphans 
