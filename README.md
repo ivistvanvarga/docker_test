@@ -17,5 +17,7 @@ docker-compose -f "docker-compose.yml" up -d --build
 http://localhost/jettyapp2
 http://localhost/jettyapp1
 
+http://54.89.211.197/
+
 destory:
 docker-compose -f "docker-compose.yml" down --remove-orphans 
